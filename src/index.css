@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink text-white font-sans antialiased min-h-screen;
+    background-image:
+      radial-gradient(ellipse 70% 50% at 90% 0%, rgba(255, 140, 0, 0.18), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 10% 100%, rgba(255, 140, 0, 0.10), transparent 60%);
+    background-attachment: fixed;
+    background-color: #000;
+  }
+
+  ::selection {
+    @apply bg-accent text-black;
+  }
+
+  /* Thin orange scrollbar accent on supporting browsers */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 140, 0, 0.4) rgba(0, 0, 0, 0.6);
+  }
+}
+
+@layer components {
+  .glass {
+    @apply rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md shadow-glass;
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 hover:border-accent/40 hover:shadow-accent;
+  }
+}
