@@ -25,7 +25,7 @@ export default function Music() {
           <h3 className="font-display text-2xl font-semibold">In the studio</h3>
           <p className="mt-4 text-white/70 leading-relaxed">
             Curated hip-hop beats and international playlists. I produce on the
-            side — drums-first arrangements, sampled textures, and a soft spot
+            side: drums-first arrangements, sampled textures, and a soft spot
             for off-grid swing.
           </p>
 

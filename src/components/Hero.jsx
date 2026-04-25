@@ -51,7 +51,7 @@ export default function Hero() {
             className="mt-6 max-w-2xl text-lg md:text-xl text-white/75 leading-relaxed"
           >
             BSc Artificial Intelligence Student @ King's College London. Building
-            applied AI — from RAG pipelines and reinforcement learning to medical
+            applied AI: from RAG pipelines and reinforcement learning to medical
             machine learning.
           </motion.p>
 

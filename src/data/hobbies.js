@@ -1,4 +1,4 @@
-// Hobby tiles — replace `placeholder` text with embedded media when assets are ready.
+// Hobby tiles: replace `placeholder` text with embedded media when assets are ready.
 export const hobbies = [
   {
     label: 'Climbing',

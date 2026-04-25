@@ -1,13 +1,24 @@
 import { motion } from 'framer-motion'
 
-export default function ProjectCard({ project, index }) {
+export default function ProjectCard({ project, index, onOpen }) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.55, delay: index * 0.06, ease: 'easeOut' }}
-      className="glass glass-hover group p-6 md:p-7 flex flex-col h-full relative overflow-hidden"
+      whileHover={{ y: -4 }}
+      onClick={() => onOpen?.(project)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onOpen?.(project)
+        }
+      }}
+      aria-label={`Open deep dive for ${project.title}`}
+      className="glass glass-hover group p-6 md:p-7 flex flex-col h-full relative overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent/60"
     >
       {project.accent && (
         <div
@@ -41,17 +52,24 @@ export default function ProjectCard({ project, index }) {
         ))}
       </ul>
 
-      {project.href && (
-        <a
-          href={project.href}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-6 inline-flex items-center gap-2 text-sm text-accent hover:text-accent-soft transition-colors"
-        >
-          View on GitHub
+      <div className="mt-auto pt-6 flex items-center justify-between gap-4">
+        <span className="text-sm text-accent group-hover:text-accent-soft transition-colors inline-flex items-center gap-2">
+          Deep dive
           <span aria-hidden="true">→</span>
-        </a>
-      )}
+        </span>
+
+        {project.href && (
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="text-xs text-white/50 hover:text-accent transition-colors"
+          >
+            GitHub
+          </a>
+        )}
+      </div>
     </motion.article>
   )
 }
