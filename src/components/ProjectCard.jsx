@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion'
+import { repoStatusLabels } from '../data/projects.js'
 
 export default function ProjectCard({ project, index, onOpen }) {
+  const repoLabel = project.href
+    ? 'GitHub Repository'
+    : repoStatusLabels[project.repoStatus] ?? 'Code Available Upon Request'
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 30 }}
@@ -58,16 +63,34 @@ export default function ProjectCard({ project, index, onOpen }) {
           <span aria-hidden="true">→</span>
         </span>
 
-        {project.href && (
+        {project.href ? (
           <a
             href={project.href}
             target="_blank"
             rel="noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="text-xs text-white/50 hover:text-accent transition-colors"
+            aria-label={`${project.title} on GitHub`}
+            className="inline-flex items-center gap-1.5 text-xs text-white/60 hover:text-accent transition-colors"
           >
-            GitHub
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.71 1.26 3.37.97.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.3-.51-1.48.11-3.08 0 0 .96-.31 3.16 1.18a10.94 10.94 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.6.23 2.78.11 3.08.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.06.78 2.13v3.16c0 .31.21.68.8.56C20.22 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z" />
+            </svg>
+            {repoLabel}
           </a>
+        ) : (
+          <span
+            aria-label={repoLabel}
+            className="inline-flex items-center gap-1.5 text-xs text-white/40 cursor-default select-none"
+          >
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-white/30" />
+            {repoLabel}
+          </span>
         )}
       </div>
     </motion.article>

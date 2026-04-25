@@ -1,14 +1,14 @@
-# Portfolio Website
+# UET Portfolio
 
-Personal portfolio of **Ulvis Edijs Turkers** — BSc Artificial Intelligence student at King's College London.
+Personal portfolio of **Ulvis Edijs Turkers**, BSc Artificial Intelligence student at King's College London.
 
-A single-page React site showcasing applied AI projects (RAG, RL, computer vision), hobbies, and music curation. Designed with a two-toned glassmorphism aesthetic (deep black + vibrant orange).
+A single-page React site showcasing applied AI projects (RAG, RL, computer vision), hobbies, and music curation. Designed with a two-toned glassmorphism aesthetic (deep black plus vibrant orange).
 
 ## Stack
 
-- **React 18** + **Vite** — fast dev server and lean production bundle
-- **Tailwind CSS** — utility-first styling with a custom accent palette
-- **Framer Motion** — scroll-reveal and entrance animations
+- **React 18** + **Vite**: fast dev server and lean production bundle
+- **Tailwind CSS**: utility-first styling with a custom accent palette
+- **Framer Motion**: scroll-reveal and entrance animations
 - Mobile-first, fully responsive, semantic HTML5
 
 ## Local development

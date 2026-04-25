@@ -33,16 +33,6 @@ export default function Hero() {
             Portfolio · 2026
           </motion.p>
 
-          <motion.h1
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={1}
-            className="mt-4 font-display text-5xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tight"
-          >
-            Ulvis Edijs <span className="text-accent">Turkers</span>
-          </motion.h1>
-
           <motion.p
             variants={fadeUp}
             initial="hidden"

@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Personal portfolio of Ulvis Edijs Turkers — AI student & engineer.",
+  "description": "UET Portfolio: applied AI projects by Ulvis Edijs Turkers, BSc AI student at KCL.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

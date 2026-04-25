@@ -1,5 +1,10 @@
 // Featured project data. Each entry can include a `detail` block
 // rendered in the Deep Dive modal.
+//
+// Link rules:
+//   - `href`: the canonical GitHub repository URL.
+//   - `repoStatus`: when no public repo exists, set to 'private' (renders
+//     "Private Repository") or 'request' (renders "Code Available Upon Request").
 export const projects = [
   {
     title: 'Medikate',
@@ -7,7 +12,7 @@ export const projects = [
     description:
       'Tabular Transformer that predicts medication non-adherence risk on IBM Z, with ordinal heads and clinician dashboard.',
     stack: ['PyTorch Lightning', 'Transformer', 'IBM Z', 'FastAPI'],
-    href: 'https://github.com/IBM-Z-Datathon-2025-Team-15/MedLock',
+    href: 'https://github.com/Neesay/IBM-Z-Datathon-2025-Team-15-EdizSlow',
     accent: true,
     detail: {
       tagline: 'IBM Z Datathon 2025, Team 15',
@@ -59,12 +64,6 @@ export const projects = [
         'TailwindCSS',
         'IBM Z / LinuxONE',
       ],
-      links: [
-        {
-          label: 'GitHub Repository',
-          href: 'https://github.com/IBM-Z-Datathon-2025-Team-15/MedLock',
-        },
-      ],
     },
   },
   {
@@ -73,7 +72,8 @@ export const projects = [
     description:
       'Lecture intelligence platform turning long academic recordings into searchable transcripts, slides, notes, and grounded Q&A.',
     stack: ['FastAPI', 'Whisper', 'Qdrant', 'Celery', 'Expo Router'],
-    href: 'https://seek-r.vercel.app',
+    // TODO: replace with the canonical Seekr GitHub repo URL when available.
+    repoStatus: 'request',
     accent: true,
     detail: {
       tagline: 'Searchable, structured study material',
@@ -133,9 +133,6 @@ export const projects = [
         'BGE-M3',
         'PyTorch',
       ],
-      links: [
-        { label: 'Live Demo', href: 'https://seek-r.vercel.app' },
-      ],
     },
   },
   {
@@ -144,7 +141,7 @@ export const projects = [
     description:
       'PyTorch CNN trained across 39 plant disease classes, deployed on Hugging Face Spaces and tracked via ClearML.',
     stack: ['PyTorch', 'CNN', 'Gradio', 'ClearML'],
-    href: 'https://huggingface.co/spaces/sdsdsdasa/Plant_Disease_Identifier',
+    href: 'https://github.kcl.ac.uk/k2405465/plant_disease_identifier',
     detail: {
       tagline: 'CNN classifier on the PlantVillage dataset',
       overview:
@@ -181,7 +178,7 @@ export const projects = [
         'Strong diagonal-dominant confusion matrix across 39 classes',
         'Augmentation pipeline tuned for leaf imagery',
         'Reproducible training and testing scripts',
-        'Live Hugging Face Spaces demo',
+        'Per-class precision, recall, and F1 reporting',
         'ClearML artifacts and metrics for every run',
       ],
       tech: [
@@ -194,12 +191,6 @@ export const projects = [
         'Matplotlib',
         'scikit-learn',
       ],
-      links: [
-        {
-          label: 'Live App (Hugging Face)',
-          href: 'https://huggingface.co/spaces/sdsdsdasa/Plant_Disease_Identifier',
-        },
-      ],
     },
   },
   {
@@ -208,6 +199,7 @@ export const projects = [
     description:
       'Containerised cloud system that detects ingredients from images and generates recipes via YOLO and a BitNet LLM.',
     stack: ['FastAPI', 'YOLO', 'BitNet', 'RabbitMQ', 'Docker'],
+    repoStatus: 'private',
     detail: {
       tagline: 'Distributed AI cooking assistant',
       overview:
@@ -259,7 +251,6 @@ export const projects = [
         'SQLite',
         'Python 3.11',
       ],
-      links: [],
     },
   },
   {
@@ -268,6 +259,7 @@ export const projects = [
     description:
       'Meta-optimised XGBoost pipeline that synchronises outlier detection with hyperparameter search to predict diamond prices.',
     stack: ['XGBoost', 'IsolationForest', 'scikit-learn', 'Pandas'],
+    repoStatus: 'private',
     detail: {
       tagline: 'CW1 ML coursework, Student ID K24054565',
       overview:
@@ -312,7 +304,6 @@ export const projects = [
         'Matplotlib',
         'Seaborn',
       ],
-      links: [],
     },
   },
   {
@@ -321,6 +312,7 @@ export const projects = [
     description:
       'Implementation of TypiClust active learning with SimCLR features and random projection, evaluated on CIFAR-10.',
     stack: ['PyTorch', 'SimCLR', 'k-means', 'CIFAR-10'],
+    repoStatus: 'private',
     detail: {
       tagline: 'Hacohen et al., ICML 2022',
       overview:
@@ -368,7 +360,6 @@ export const projects = [
         'NumPy',
         'tqdm',
       ],
-      links: [],
     },
   },
   {
@@ -376,6 +367,7 @@ export const projects = [
     description:
       'PPO reinforcement-learning agent trained on the S&P 500, achieving 34% annualised profit in back-testing across multi-year windows.',
     stack: ['PPO', 'Reinforcement Learning', 'PyTorch', 'Finance'],
+    repoStatus: 'private',
     detail: {
       tagline: 'Policy-gradient trading agent',
       overview:
@@ -405,7 +397,6 @@ export const projects = [
         'Rolling walk-forward evaluation',
       ],
       tech: ['PyTorch', 'Gym', 'NumPy', 'Pandas'],
-      links: [],
     },
   },
   {
@@ -413,6 +404,7 @@ export const projects = [
     description:
       'ROS-based navigation stack for indoor robotics: mapping, path planning, and real-time obstacle avoidance.',
     stack: ['ROS', 'C++', 'Robotics'],
+    repoStatus: 'private',
     detail: {
       tagline: 'Indoor navigation stack',
       overview:
@@ -442,7 +434,11 @@ export const projects = [
         'Costmap-based obstacle inflation',
       ],
       tech: ['ROS', 'C++', 'rviz', 'Gazebo'],
-      links: [],
     },
   },
 ]
+
+export const repoStatusLabels = {
+  private: 'Private Repository',
+  request: 'Code Available Upon Request',
+}

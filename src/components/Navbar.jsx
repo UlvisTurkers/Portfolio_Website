@@ -34,7 +34,7 @@ export default function Navbar() {
             href="#top"
             className="font-display text-lg font-semibold tracking-tight"
           >
-            UET<span className="text-accent">.</span>
+            UET <span className="text-accent">Portfolio</span>
           </a>
 
           <ul className="hidden md:flex items-center gap-7 text-sm text-white/70">
