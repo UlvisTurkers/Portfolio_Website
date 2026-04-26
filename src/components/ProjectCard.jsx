@@ -2,11 +2,10 @@ import { motion } from 'framer-motion'
 import { repoStatusLabels } from '../data/projects.js'
 
 export default function ProjectCard({ project, index, onOpen }) {
-  // Three render branches: live href, KCL Enterprise restricted, or fully private.
+  // Card surfaces a repo signal only for public or restricted projects;
+  // private repositories show "Deep dive" alone.
   const isRestricted = project.repoStatus === 'restricted'
-  const repoLabel = project.href
-    ? 'GitHub Repository'
-    : repoStatusLabels[project.repoStatus] ?? 'Private Repository'
+  const showsRepoSignal = Boolean(project.href) || isRestricted
 
   return (
     <motion.article
@@ -59,13 +58,17 @@ export default function ProjectCard({ project, index, onOpen }) {
         ))}
       </ul>
 
-      <div className="mt-auto pt-6 flex items-center justify-between gap-4">
+      <div
+        className={`mt-auto pt-6 flex items-center gap-4 ${
+          showsRepoSignal ? 'justify-between' : 'justify-start'
+        }`}
+      >
         <span className="text-sm text-accent group-hover:text-accent-soft transition-colors inline-flex items-center gap-2">
           Deep dive
           <span aria-hidden="true">→</span>
         </span>
 
-        {project.href ? (
+        {project.href && (
           <a
             href={project.href}
             target="_blank"
@@ -85,9 +88,11 @@ export default function ProjectCard({ project, index, onOpen }) {
             </svg>
             GitHub Repository
           </a>
-        ) : isRestricted ? (
+        )}
+
+        {!project.href && isRestricted && (
           <span
-            aria-label={repoLabel}
+            aria-label="Access Restricted"
             className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.15em] rounded-full border border-accent/50 bg-accent/10 px-2.5 py-1 text-accent cursor-default select-none"
           >
             <svg
@@ -105,14 +110,6 @@ export default function ProjectCard({ project, index, onOpen }) {
               <path d="M8 11V7a4 4 0 0 1 8 0v4" />
             </svg>
             Access Restricted
-          </span>
-        ) : (
-          <span
-            aria-label={repoLabel}
-            className="inline-flex items-center gap-1.5 text-xs text-white/40 cursor-default select-none"
-          >
-            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-white/30" />
-            {repoLabel}
           </span>
         )}
       </div>

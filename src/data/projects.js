@@ -5,8 +5,8 @@
 //   - `href`: the canonical GitHub repository URL (renders the orange
 //     "GitHub Repository" link in card + detail).
 //   - `repoStatus`: when no public repo exists, set to one of:
-//       'private'    -> "Private Repository" (subtle grey)
-//       'restricted' -> "Access Restricted (KCL Enterprise)" (orange pill)
+//       'private'    -> repo signal is hidden in the UI entirely
+//       'restricted' -> "Access Restricted" orange pill (no link)
 export const projects = [
   {
     title: 'Medikate',
@@ -70,11 +70,10 @@ export const projects = [
   },
   {
     title: 'Seekr',
-    badge: 'Group Project · KCL',
     description:
       'Lecture intelligence platform turning long academic recordings into searchable transcripts, slides, notes, and grounded Q&A.',
     stack: ['FastAPI', 'Whisper', 'Qdrant', 'Celery', 'Expo Router'],
-    // Repo lives on KCL Enterprise GitHub and is not externally accessible.
+    // Repository hosted privately; surfaced as restricted in the UI.
     repoStatus: 'restricted',
     accent: true,
     detail: {
@@ -139,11 +138,10 @@ export const projects = [
   },
   {
     title: 'Plant Disease Identifier',
-    badge: '5CCSAGAP · KCL',
     description:
       'PyTorch CNN trained across 39 plant disease classes, deployed on Hugging Face Spaces and tracked via ClearML.',
     stack: ['PyTorch', 'CNN', 'Gradio', 'ClearML'],
-    // Repo lives on KCL Enterprise GitHub and is not externally accessible.
+    // Repository hosted privately; surfaced as restricted in the UI.
     repoStatus: 'restricted',
     detail: {
       tagline: 'CNN classifier on the PlantVillage dataset',
@@ -198,11 +196,10 @@ export const projects = [
   },
   {
     title: 'Smart Kitchen Helper',
-    badge: 'Cloud Computing · KCL',
     description:
       'Containerised cloud system that detects ingredients from images and generates recipes via YOLO and a BitNet LLM.',
     stack: ['FastAPI', 'YOLO', 'BitNet', 'RabbitMQ', 'Docker'],
-    href: 'https://github.com/UlvisTurkers/coursework-UlvisTurkers',
+    href: 'https://github.com/5CCSACCA/coursework-UlvisTurkers',
     detail: {
       tagline: 'Distributed AI cooking assistant',
       overview:
@@ -258,7 +255,6 @@ export const projects = [
   },
   {
     title: 'Diamond Regression Challenge',
-    badge: 'CW1 · Machine Learning',
     description:
       'Meta-optimised XGBoost pipeline that synchronises outlier detection with hyperparameter search to predict diamond prices.',
     stack: ['XGBoost', 'IsolationForest', 'scikit-learn', 'Pandas'],
@@ -311,7 +307,6 @@ export const projects = [
   },
   {
     title: 'TypiClust (TPC_RP) on CIFAR-10',
-    badge: 'Active Learning · ML CW2',
     description:
       'Implementation of TypiClust active learning with SimCLR features and random projection, evaluated on CIFAR-10.',
     stack: ['PyTorch', 'SimCLR', 'k-means', 'CIFAR-10'],
@@ -443,5 +438,5 @@ export const projects = [
 
 export const repoStatusLabels = {
   private: 'Private Repository',
-  restricted: 'Access Restricted (KCL Enterprise)',
+  restricted: 'Access Restricted',
 }

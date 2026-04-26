@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { repoStatusLabels } from '../data/projects.js'
 
 const backdrop = {
   hidden: { opacity: 0 },
@@ -250,7 +249,7 @@ export default function ProjectDetail({ project, onClose }) {
               Back to Portfolio
             </button>
 
-            {project.href ? (
+            {project.href && (
               <a
                 href={project.href}
                 target="_blank"
@@ -268,10 +267,12 @@ export default function ProjectDetail({ project, onClose }) {
                 </svg>
                 GitHub Repository
               </a>
-            ) : project.repoStatus === 'restricted' ? (
+            )}
+
+            {!project.href && project.repoStatus === 'restricted' && (
               <span
-                aria-label={repoStatusLabels.restricted}
-                className="inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/10 px-5 py-3 text-sm text-accent cursor-default select-none"
+                aria-label="Access Restricted"
+                className="inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/10 px-5 py-3 text-xs uppercase tracking-[0.2em] text-accent cursor-default select-none"
               >
                 <svg
                   width="14"
@@ -287,20 +288,7 @@ export default function ProjectDetail({ project, onClose }) {
                   <rect x="4" y="11" width="16" height="10" rx="2" />
                   <path d="M8 11V7a4 4 0 0 1 8 0v4" />
                 </svg>
-                Access Restricted (KCL Enterprise)
-              </span>
-            ) : (
-              <span
-                aria-label={
-                  repoStatusLabels[project.repoStatus] ?? 'Private Repository'
-                }
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm text-white/50 cursor-default select-none"
-              >
-                <span
-                  aria-hidden="true"
-                  className="h-1.5 w-1.5 rounded-full bg-white/40"
-                />
-                {repoStatusLabels[project.repoStatus] ?? 'Private Repository'}
+                Access Restricted
               </span>
             )}
           </motion.div>
