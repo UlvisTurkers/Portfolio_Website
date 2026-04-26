@@ -3,37 +3,31 @@ import { motion } from 'framer-motion'
 
 const backdrop = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { duration: 0.25 } },
-  exit: { opacity: 0, transition: { duration: 0.2 } },
-}
-
-const panel = {
-  hidden: { opacity: 0, y: 60, scale: 0.97 },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-  },
-  exit: {
-    opacity: 0,
-    y: 40,
-    scale: 0.98,
-    transition: { duration: 0.3, ease: 'easeIn' },
-  },
+  show: { opacity: 1, transition: { duration: 0.3 } },
+  exit: { opacity: 0, transition: { duration: 0.25 } },
 }
 
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.05, delayChildren: 0.18 } },
+  show: { transition: { staggerChildren: 0.04, delayChildren: 0.35 } },
 }
 
-const tile = {
-  hidden: { opacity: 0, y: 20 },
+const tileVariant = {
+  hidden: { opacity: 0, y: 22 },
   show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
 }
 
-function MediaTile({ item }) {
+const fade = {
+  hidden: { opacity: 0, y: 12 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.3, duration: 0.4, ease: 'easeOut' },
+  },
+  exit: { opacity: 0, transition: { duration: 0.15 } },
+}
+
+function MediaItem({ item }) {
   const [failed, setFailed] = useState(false)
 
   if (failed) {
@@ -54,8 +48,10 @@ function MediaTile({ item }) {
     return (
       <video
         src={item.src}
-        controls
+        muted
+        loop
         playsInline
+        autoPlay
         preload="metadata"
         aria-label={item.alt}
         onError={() => setFailed(true)}
@@ -89,7 +85,8 @@ export default function HobbyGallery({ hobby, onClose }) {
     }
   }, [onClose])
 
-  const items = hobby.media ?? []
+  const [hero, ...rest] = hobby.media
+  const isVideoHero = hero?.type === 'video'
 
   return (
     <motion.div
@@ -101,35 +98,29 @@ export default function HobbyGallery({ hobby, onClose }) {
       role="dialog"
       aria-modal="true"
       aria-label={`${hobby.label} gallery`}
-      className="fixed inset-0 z-[60] flex items-start justify-center bg-black/80 backdrop-blur-xl overflow-y-auto px-4 py-10 sm:py-16"
+      className="fixed inset-0 z-[60] flex items-start justify-center bg-black/85 backdrop-blur-xl overflow-y-auto px-4 py-8 sm:py-14"
     >
-      <motion.section
-        variants={panel}
+      <div
         onClick={(e) => e.stopPropagation()}
-        className="glass relative w-full max-w-5xl overflow-hidden p-6 sm:p-9 md:p-12"
+        className="relative w-full max-w-6xl"
       >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-32 -right-24 h-72 w-72 rounded-full bg-accent/25 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-32 -left-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl"
-        />
-
-        <button
+        <motion.button
           type="button"
           onClick={onClose}
+          variants={fade}
+          initial="hidden"
+          animate="show"
+          exit="exit"
           aria-label={`Close ${hobby.label} gallery`}
-          className="absolute top-4 right-4 z-10 rounded-full border border-accent/40 bg-black/60 p-2 text-accent hover:text-black hover:bg-accent transition-colors"
+          className="fixed top-5 right-5 sm:top-8 sm:right-8 z-[70] inline-flex items-center gap-2 rounded-full border border-accent/50 bg-black/70 px-4 py-2 text-sm font-semibold text-accent hover:bg-accent hover:text-black transition-colors"
         >
           <svg
-            width="16"
-            height="16"
+            width="14"
+            height="14"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2.2"
+            strokeWidth="2.4"
             strokeLinecap="round"
             strokeLinejoin="round"
             aria-hidden="true"
@@ -137,50 +128,96 @@ export default function HobbyGallery({ hobby, onClose }) {
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
-        </button>
+          Close
+        </motion.button>
 
-        <div className="relative">
-          <span className="text-[11px] uppercase tracking-[0.3em] text-accent/80">
-            Gallery
-          </span>
-          <h3 className="mt-2 font-display text-2xl md:text-4xl font-semibold tracking-tight text-white">
-            {hobby.label}
-          </h3>
-          {hobby.description && (
-            <p className="mt-3 text-white/70 leading-relaxed text-sm md:text-base max-w-2xl">
+        <motion.section
+          layout
+          layoutId={`hobby-card-${hobby.id}`}
+          className="glass relative w-full overflow-hidden aspect-[16/9]"
+        >
+          {hero && !isVideoHero && (
+            <img
+              src={hero.src}
+              alt={`${hobby.label} hero`}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          )}
+          {hero && isVideoHero && (
+            <video
+              src={hero.src}
+              muted
+              loop
+              playsInline
+              autoPlay
+              aria-label={`${hobby.label} hero clip`}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          )}
+
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-32 -right-24 h-72 w-72 rounded-full bg-accent/25 blur-3xl"
+          />
+
+          <div className="relative h-full w-full flex flex-col justify-end p-6 sm:p-10">
+            <span className="text-[11px] uppercase tracking-[0.3em] text-accent/80">
+              Gallery
+            </span>
+            <h3 className="mt-2 font-display text-3xl md:text-5xl font-semibold tracking-tight text-white">
+              {hobby.label}
+            </h3>
+            <p className="mt-3 max-w-2xl text-white/80 leading-relaxed text-sm md:text-base">
               {hobby.description}
             </p>
-          )}
-        </div>
+          </div>
+        </motion.section>
 
         <motion.div
           variants={stagger}
           initial="hidden"
           animate="show"
-          className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {items.map((item, i) => (
-            <motion.div key={`${item.src}-${i}`} variants={tile}>
-              <MediaTile item={item} />
+          {rest.map((item, i) => (
+            <motion.div key={`${item.src}-${i}`} variants={tileVariant}>
+              <MediaItem item={item} />
             </motion.div>
           ))}
 
-          {items.length === 0 && (
+          {rest.length === 0 && (
             <motion.div
-              variants={tile}
+              variants={tileVariant}
               className="sm:col-span-2 lg:col-span-3 rounded-xl border border-dashed border-accent/30 bg-black/40 p-8 text-center"
             >
               <p className="text-sm text-white/60">
-                No media yet. Drop files into{' '}
-                <code className="text-accent">
-                  /public/assets/{hobby.id}/
-                </code>{' '}
-                and they will appear here.
+                Only one item in this gallery so far.
               </p>
             </motion.div>
           )}
         </motion.div>
-      </motion.section>
+
+        <motion.div
+          variants={fade}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          className="mt-8 flex justify-center"
+        >
+          <button
+            type="button"
+            onClick={onClose}
+            className="inline-flex items-center gap-2 rounded-full bg-accent text-black px-6 py-3 text-sm font-semibold hover:bg-accent-soft transition-colors"
+          >
+            <span aria-hidden="true">←</span>
+            Back to portfolio
+          </button>
+        </motion.div>
+      </div>
     </motion.div>
   )
 }
