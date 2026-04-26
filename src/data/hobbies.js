@@ -72,10 +72,8 @@ const carsFiles = [
   'WhatsApp Image 2026-04-26 at 1.08.14 AM (14).jpeg',
   'WhatsApp Image 2026-04-26 at 1.08.14 AM (15).jpeg',
   'WhatsApp Image 2026-04-26 at 1.08.14 AM (16).jpeg',
-  'WhatsApp Image 2026-04-26 at 1.08.14 AM (17).jpeg',
   'WhatsApp Image 2026-04-26 at 1.08.14 AM (18).jpeg',
   'WhatsApp Image 2026-04-26 at 1.08.14 AM (19).jpeg',
-  'WhatsApp Image 2026-04-26 at 1.10.07 AM.jpeg',
   'WhatsApp Video 2026-04-26 at 1.08.14 AM.mp4',
 ]
 
@@ -90,8 +88,6 @@ const photographyFiles = [
   'WhatsApp Image 2026-04-26 at 1.03.22 AM (5).jpeg',
   'WhatsApp Image 2026-04-26 at 1.03.23 AM.jpeg',
   'WhatsApp Image 2026-04-26 at 1.03.23 AM (1).jpeg',
-  'WhatsApp Image 2026-04-26 at 1.03.23 AM (2).jpeg',
-  'WhatsApp Image 2026-04-26 at 1.03.23 AM (3).jpeg',
   'WhatsApp Image 2026-04-26 at 1.03.23 AM (4).jpeg',
   'WhatsApp Image 2026-04-26 at 1.03.23 AM (5).jpeg',
   'WhatsApp Image 2026-04-26 at 1.03.23 AM (6).jpeg',
@@ -107,7 +103,6 @@ const photographyFiles = [
   'WhatsApp Image 2026-04-26 at 1.03.24 AM (7).jpeg',
   'WhatsApp Image 2026-04-26 at 1.03.24 AM (8).jpeg',
   'WhatsApp Image 2026-04-26 at 1.13.04 AM.jpeg',
-  'WhatsApp Image 2026-04-26 at 1.13.05 AM.jpeg',
 ]
 
 export const hobbies = [

@@ -4,8 +4,16 @@ import Section from './Section.jsx'
 import BeatPlayer from './BeatPlayer.jsx'
 import { beats, FEATURED_COUNT } from '../data/beats.js'
 
-// Drop a Spotify playlist or album ID here to enable the embed.
-const SPOTIFY_PLAYLIST_ID = 'YOUR_PLAYLIST_ID'
+// Curated Spotify library. The first entry loads by default; clicking a
+// row swaps the iframe. Rename `name` per playlist when you have titles.
+const PLAYLISTS = [
+  { id: '3RWdAZ8Y3T5NLwcHcqBJaT?si=7f782482cd0b4975', name: 'A Cold Breeze' },
+  { id: '0xoau0jzXLQOcNvIr1Hul5?si=b42aa515310247cb', name: 'Gold' },
+  { id: '7IPzL8jWmtQoJ00gTqphRp?si=b2580f28b39d4846', name: 'Angels Voice' },
+  { id: '0Mf9RnQWv0g4jS3NX7abMc?si=79b3752a08aa4378', name: 'Turkish Delight' },
+  { id: '0DdG7PVQwbTUVwMljFhoX3?si=4c8a324949fc4873', name: 'Geçmişe Bir Bakış' },
+  { id: '51FygeJr8Av5Yj8U4TzX2J?si=956afa72d4f94b84', name: 'W.U.I.T.S.' },
+]
 
 const containerPulse = {
   borderColor: [
@@ -23,11 +31,10 @@ const containerPulse = {
 export default function Music() {
   const [activeId, setActiveId] = useState(null)
   const [expanded, setExpanded] = useState(false)
+  const [selectedPlaylistId, setSelectedPlaylistId] = useState(PLAYLISTS[0].id)
 
   const featured = beats.slice(0, FEATURED_COUNT)
   const rest = beats.slice(FEATURED_COUNT)
-  const hasSpotify =
-    SPOTIFY_PLAYLIST_ID && SPOTIFY_PLAYLIST_ID !== 'YOUR_PLAYLIST_ID'
 
   return (
     <Section id="music" eyebrow="Sound & Curation" title="Music Production">
@@ -120,33 +127,81 @@ export default function Music() {
               process: ranging from international hip-hop to jazz and soul.
             </p>
 
-            <div className="mt-6 aspect-square rounded-2xl overflow-hidden border border-white/10 bg-black/60 backdrop-blur-md">
-              {hasSpotify ? (
-                <iframe
-                  title="Curated Spotify playlist"
-                  src={`https://open.spotify.com/embed/playlist/${SPOTIFY_PLAYLIST_ID}`}
+            {/* Active iframe. Keyed remount lets AnimatePresence cross-fade
+                when the user picks a different playlist. */}
+            <div className="mt-6 h-[380px] rounded-2xl overflow-hidden border border-white/10 bg-black/60 backdrop-blur-md relative">
+              <AnimatePresence mode="wait">
+                <motion.iframe
+                  key={selectedPlaylistId}
+                  title="Selected Spotify playlist"
+                  src={`https://open.spotify.com/embed/playlist/${selectedPlaylistId}`}
                   width="100%"
                   height="100%"
                   frameBorder="0"
                   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                   loading="lazy"
-                  className="block h-full w-full"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                  className="absolute inset-0 h-full w-full"
                 />
-              ) : (
-                <div className="h-full w-full flex flex-col items-center justify-center text-center px-8 bg-gradient-to-br from-accent/15 via-black to-black">
-                  <div className="text-[11px] uppercase tracking-[0.35em] text-accent/80 mb-3">
-                    Spotify embed pending
-                  </div>
-                  <div className="font-display text-xl text-white">
-                    Replace SPOTIFY_PLAYLIST_ID
-                  </div>
-                  <div className="mt-3 text-xs text-white/55 leading-relaxed">
-                    Set the constant at the top of{' '}
-                    <code className="text-accent">Music.jsx</code> to your
-                    Spotify playlist ID and the embed will appear here.
-                  </div>
-                </div>
-              )}
+              </AnimatePresence>
+            </div>
+
+            <div className="mt-5">
+              <div className="flex items-baseline justify-between mb-2">
+                <span className="text-[11px] uppercase tracking-[0.3em] text-accent/80">
+                  Playlist Library
+                </span>
+                <span className="text-[11px] text-white/40">
+                  {PLAYLISTS.length} curated
+                </span>
+              </div>
+
+              <ul className="scroll-orange max-h-56 overflow-y-auto pr-2 flex flex-col gap-2">
+                {PLAYLISTS.map((p, i) => {
+                  const active = p.id === selectedPlaylistId
+                  return (
+                    <li key={p.id}>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedPlaylistId(p.id)}
+                        aria-pressed={active}
+                        aria-label={`Load ${p.name}`}
+                        className={`w-full text-left rounded-lg border px-4 py-3 transition-all duration-200 ${
+                          active
+                            ? 'border-accent bg-accent/10 text-white shadow-[0_0_18px_rgba(255,140,0,0.55)]'
+                            : 'border-white/10 bg-white/[0.04] text-white/60 hover:border-accent/30 hover:text-white/85'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="flex items-center gap-3 min-w-0">
+                            <span
+                              className={`text-[11px] tabular-nums tracking-widest ${
+                                active ? 'text-accent' : 'text-white/40'
+                              }`}
+                            >
+                              {String(i + 1).padStart(2, '0')}
+                            </span>
+                            <span className="font-display text-sm truncate">
+                              {p.name}
+                            </span>
+                          </div>
+                          {active && (
+                            <span
+                              aria-hidden="true"
+                              className="text-[10px] uppercase tracking-[0.25em] text-accent"
+                            >
+                              Now playing
+                            </span>
+                          )}
+                        </div>
+                      </button>
+                    </li>
+                  )
+                })}
+              </ul>
             </div>
           </motion.div>
         </motion.div>

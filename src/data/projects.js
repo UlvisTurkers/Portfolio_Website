@@ -2,9 +2,11 @@
 // rendered in the Deep Dive modal.
 //
 // Link rules:
-//   - `href`: the canonical GitHub repository URL.
-//   - `repoStatus`: when no public repo exists, set to 'private' (renders
-//     "Private Repository") or 'request' (renders "Code Available Upon Request").
+//   - `href`: the canonical GitHub repository URL (renders the orange
+//     "GitHub Repository" link in card + detail).
+//   - `repoStatus`: when no public repo exists, set to one of:
+//       'private'    -> "Private Repository" (subtle grey)
+//       'restricted' -> "Access Restricted (KCL Enterprise)" (orange pill)
 export const projects = [
   {
     title: 'Medikate',
@@ -72,8 +74,8 @@ export const projects = [
     description:
       'Lecture intelligence platform turning long academic recordings into searchable transcripts, slides, notes, and grounded Q&A.',
     stack: ['FastAPI', 'Whisper', 'Qdrant', 'Celery', 'Expo Router'],
-    // TODO: replace with the canonical Seekr GitHub repo URL when available.
-    repoStatus: 'request',
+    // Repo lives on KCL Enterprise GitHub and is not externally accessible.
+    repoStatus: 'restricted',
     accent: true,
     detail: {
       tagline: 'Searchable, structured study material',
@@ -141,7 +143,8 @@ export const projects = [
     description:
       'PyTorch CNN trained across 39 plant disease classes, deployed on Hugging Face Spaces and tracked via ClearML.',
     stack: ['PyTorch', 'CNN', 'Gradio', 'ClearML'],
-    href: 'https://github.kcl.ac.uk/k2405465/plant_disease_identifier',
+    // Repo lives on KCL Enterprise GitHub and is not externally accessible.
+    repoStatus: 'restricted',
     detail: {
       tagline: 'CNN classifier on the PlantVillage dataset',
       overview:
@@ -199,7 +202,7 @@ export const projects = [
     description:
       'Containerised cloud system that detects ingredients from images and generates recipes via YOLO and a BitNet LLM.',
     stack: ['FastAPI', 'YOLO', 'BitNet', 'RabbitMQ', 'Docker'],
-    repoStatus: 'private',
+    href: 'https://github.com/UlvisTurkers/coursework-UlvisTurkers',
     detail: {
       tagline: 'Distributed AI cooking assistant',
       overview:
@@ -259,7 +262,7 @@ export const projects = [
     description:
       'Meta-optimised XGBoost pipeline that synchronises outlier detection with hyperparameter search to predict diamond prices.',
     stack: ['XGBoost', 'IsolationForest', 'scikit-learn', 'Pandas'],
-    repoStatus: 'private',
+    href: 'https://github.com/UlvisTurkers/machine-learning-coursework',
     detail: {
       tagline: 'CW1 ML coursework, Student ID K24054565',
       overview:
@@ -312,7 +315,7 @@ export const projects = [
     description:
       'Implementation of TypiClust active learning with SimCLR features and random projection, evaluated on CIFAR-10.',
     stack: ['PyTorch', 'SimCLR', 'k-means', 'CIFAR-10'],
-    repoStatus: 'private',
+    href: 'https://github.com/UlvisTurkers/machine-learning-coursework-2',
     detail: {
       tagline: 'Hacohen et al., ICML 2022',
       overview:
@@ -440,5 +443,5 @@ export const projects = [
 
 export const repoStatusLabels = {
   private: 'Private Repository',
-  request: 'Code Available Upon Request',
+  restricted: 'Access Restricted (KCL Enterprise)',
 }

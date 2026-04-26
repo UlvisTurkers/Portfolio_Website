@@ -34,7 +34,7 @@ export default function ThankYou() {
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a
-              href="mailto:ediz.flash@gmail.com"
+              href="mailto:ulvis.edijs.turkers@gmail.com"
               className="rounded-full bg-accent text-black px-5 py-2 text-sm font-semibold hover:bg-accent-soft transition-colors"
             >
               Email me

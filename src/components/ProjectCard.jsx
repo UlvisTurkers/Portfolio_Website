@@ -2,9 +2,11 @@ import { motion } from 'framer-motion'
 import { repoStatusLabels } from '../data/projects.js'
 
 export default function ProjectCard({ project, index, onOpen }) {
+  // Three render branches: live href, KCL Enterprise restricted, or fully private.
+  const isRestricted = project.repoStatus === 'restricted'
   const repoLabel = project.href
     ? 'GitHub Repository'
-    : repoStatusLabels[project.repoStatus] ?? 'Code Available Upon Request'
+    : repoStatusLabels[project.repoStatus] ?? 'Private Repository'
 
   return (
     <motion.article
@@ -70,7 +72,7 @@ export default function ProjectCard({ project, index, onOpen }) {
             rel="noreferrer"
             onClick={(e) => e.stopPropagation()}
             aria-label={`${project.title} on GitHub`}
-            className="inline-flex items-center gap-1.5 text-xs text-white/60 hover:text-accent transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-white/70 hover:text-accent transition-colors"
           >
             <svg
               width="14"
@@ -81,8 +83,29 @@ export default function ProjectCard({ project, index, onOpen }) {
             >
               <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.71 1.26 3.37.97.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.3-.51-1.48.11-3.08 0 0 .96-.31 3.16 1.18a10.94 10.94 0 0 1 5.76 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.6.23 2.78.11 3.08.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.06.78 2.13v3.16c0 .31.21.68.8.56C20.22 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z" />
             </svg>
-            {repoLabel}
+            GitHub Repository
           </a>
+        ) : isRestricted ? (
+          <span
+            aria-label={repoLabel}
+            className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.15em] rounded-full border border-accent/50 bg-accent/10 px-2.5 py-1 text-accent cursor-default select-none"
+          >
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="4" y="11" width="16" height="10" rx="2" />
+              <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+            </svg>
+            Access Restricted
+          </span>
         ) : (
           <span
             aria-label={repoLabel}

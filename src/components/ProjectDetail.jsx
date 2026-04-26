@@ -255,7 +255,7 @@ export default function ProjectDetail({ project, onClose }) {
                 href={project.href}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm hover:border-accent/60 hover:text-accent transition-colors"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm text-white/85 hover:border-accent/60 hover:text-accent hover:bg-accent/10 transition-colors"
               >
                 <svg
                   width="16"
@@ -268,11 +268,31 @@ export default function ProjectDetail({ project, onClose }) {
                 </svg>
                 GitHub Repository
               </a>
+            ) : project.repoStatus === 'restricted' ? (
+              <span
+                aria-label={repoStatusLabels.restricted}
+                className="inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/10 px-5 py-3 text-sm text-accent cursor-default select-none"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="4" y="11" width="16" height="10" rx="2" />
+                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                </svg>
+                Access Restricted (KCL Enterprise)
+              </span>
             ) : (
               <span
                 aria-label={
-                  repoStatusLabels[project.repoStatus] ??
-                  'Code Available Upon Request'
+                  repoStatusLabels[project.repoStatus] ?? 'Private Repository'
                 }
                 className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm text-white/50 cursor-default select-none"
               >
@@ -280,8 +300,7 @@ export default function ProjectDetail({ project, onClose }) {
                   aria-hidden="true"
                   className="h-1.5 w-1.5 rounded-full bg-white/40"
                 />
-                {repoStatusLabels[project.repoStatus] ??
-                  'Code Available Upon Request'}
+                {repoStatusLabels[project.repoStatus] ?? 'Private Repository'}
               </span>
             )}
           </motion.div>
