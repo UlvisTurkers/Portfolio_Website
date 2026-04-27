@@ -71,7 +71,7 @@ export const projects = [
   {
     title: 'Seekr',
     description:
-      'Lecture intelligence platform turning long academic recordings into searchable transcripts, slides, notes, and grounded Q&A.',
+      'Lecture intelligence platform turning long-form recordings into searchable transcripts, slides, notes, and grounded Q&A.',
     stack: ['FastAPI', 'Whisper', 'Qdrant', 'Celery', 'Expo Router'],
     // Repository hosted privately; surfaced as restricted in the UI.
     repoStatus: 'restricted',
@@ -79,7 +79,7 @@ export const projects = [
     detail: {
       tagline: 'Searchable, structured study material',
       overview:
-        'Seekr turns long academic recordings into searchable, structured study material. It brings transcript search, slide extraction, grounded Q&A, and generated notes into one workflow that is easier to revise from than a raw lecture recording.',
+        'Seekr turns long-form lecture recordings into searchable, structured reference material. It brings transcript search, slide extraction, grounded Q&A, and generated notes into one workflow that is easier to navigate than a raw recording.',
       architecture: [
         {
           title: 'Frontend',
@@ -103,7 +103,7 @@ export const projects = [
         },
       ],
       metrics: [
-        { value: '87%', label: 'Answer relevance on academic content' },
+        { value: '87%', label: 'Answer relevance on lecture content' },
         { value: '< 2s', label: 'Median search latency' },
         { value: '6+', label: 'Coordinated services in stack' },
         { value: '100%', label: 'Citations grounded in transcript' },
@@ -162,7 +162,7 @@ export const projects = [
         },
         {
           title: 'Experiment Tracking',
-          body: 'All runs logged to a KCL-hosted ClearML server under project "Plant Disease CNN". Best model artifact stored as `best_model_checkpoint`.',
+          body: 'All runs logged to a self-hosted ClearML server under project "Plant Disease CNN". Best model artifact stored as `best_model_checkpoint`.',
         },
         {
           title: 'Deployment',
@@ -260,7 +260,7 @@ export const projects = [
     stack: ['XGBoost', 'IsolationForest', 'scikit-learn', 'Pandas'],
     href: 'https://github.com/UlvisTurkers/machine-learning-coursework',
     detail: {
-      tagline: 'CW1 ML coursework, Student ID K24054565',
+      tagline: 'Meta-optimised XGBoost for diamond price prediction',
       overview:
         'A high-performance regression model to predict the `outcome` variable in a tabular diamond dataset. The final solution is a Meta-Optimised XGBoost Pipeline that synchronises outlier detection with model hyperparameter tuning to achieve a robust generalisation score.',
       architecture: [
